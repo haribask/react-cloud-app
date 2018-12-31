@@ -31,9 +31,7 @@ mongoose.connect(
 
 let db = mongoose.connection;
 
-db.once("open", () =>
-  console.log(`connected to Mongo db, service at ${API_PORT}`)
-);
+db.once("open", () => console.log(`connected to Mongo db`));
 
 db.on("error", console.error.bind(console, "MongoDB connection error"));
 
