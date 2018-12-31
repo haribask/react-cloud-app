@@ -4,7 +4,7 @@
   "description": "MERN_stack_in_Heroku",
   "main": "index.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "node index.js",
     "heroku-postbuild": "cd client && npm install && npm run build"
   },
   "author": "HariLakshmiNarayanan",
