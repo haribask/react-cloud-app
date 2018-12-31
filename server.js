@@ -10,8 +10,8 @@ const axios = require("axios");
 const path = require("path");
 //const authCheckMiddleware = require("./middleware/auth-check");
 
-const API_PORT = process.env.PORT || 3001;
-console.log("API_PORT :" + API_PORT);
+const API_PORT = process.env.PORT || config.apiPort;
+//console.log("API_PORT :" + API_PORT);
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -293,6 +293,9 @@ router.post("/login", (req, res, next) => {
 
 //app.use("/api", authCheckMiddleware);
 app.use("/api", router);
+
+console.log("__dirname :" + __dirname);
+//console.log("_dirname :" + _dirname);
 
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "client", "build", "index.html"));
