@@ -298,4 +298,4 @@ app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "client", "build", "index.html"));
 });
 
-app.listen(3001, () => console.log("listening on port " + API_PORT));
+app.listen(API_PORT, () => console.log("listening on port " + API_PORT));
