@@ -11,7 +11,7 @@ const path = require("path");
 //const authCheckMiddleware = require("./middleware/auth-check");
 
 const API_PORT = process.env.PORT || config.apiPort;
-//console.log("API_PORT :" + API_PORT);
+console.log("API_PORT :" + API_PORT);
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
