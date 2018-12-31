@@ -7,20 +7,22 @@ const UserDetails = require("./models/userdetails");
 const config = require("./config");
 const jwt = require("jsonwebtoken");
 const axios = require("axios");
-const path=require("path");
+const path = require("path");
 //const authCheckMiddleware = require("./middleware/auth-check");
 
-const API_PORT = 3001;
+const API_PORT = process.env.PORT || 3001;
+console.log("API_PORT :" + API_PORT);
+
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname,"client", "build")));
+app.use(express.static(path.join(__dirname, "client", "build")));
 //app.use(cors());
 
 const router = express.Router();
 
-const url = config.dbUri;
-//console.log("mongo dbUri:" + url);
+const url = process.env.DBURI || config.dbUri;
+console.log("mongo dbUri:" + url);
 
 mongoose.connect(
   url,
@@ -47,9 +49,10 @@ authenticate = (req, res, next) => {
     });
   }
 
-  //console.log("<auth-check.js>jwtSecret: " + config.jwtSecret);
+  const JWT_SECRET = process.env.JWTSECRET || config.jwtSecret;
+  console.log("jwtSecret: " + JWT_SECRET);
 
-  return jwt.verify(token, config.jwtSecret, (err, decoded) => {
+  return jwt.verify(token, JWT_SECRET, (err, decoded) => {
     // the 401 code is for unauthorized status
     if (err) {
       //return res.status(401).end();
@@ -207,7 +210,7 @@ router.post("/register", (req, res, next) => {
             sub: previousUser._id
           };
 
-          const token = jwt.sign(payload, config.jwtSecret);
+          const token = jwt.sign(payload, JWT_SECRET);
 
           const userData = {
             email: previousUser.email
@@ -275,7 +278,7 @@ router.post("/login", (req, res, next) => {
       sub: previousUser._id
     };
 
-    const token = jwt.sign(payload, config.jwtSecret);
+    const token = jwt.sign(payload, JWT_SECRET);
 
     const userData = {
       email: previousUser.email
@@ -293,7 +296,7 @@ router.post("/login", (req, res, next) => {
 //app.use("/api", authCheckMiddleware);
 app.use("/api", router);
 
-app.get("*", (req,res) => {
+app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "client", "build", "index.html"));
 });
 
