@@ -10,7 +10,7 @@ const axios = require("axios");
 const path = require("path");
 //const authCheckMiddleware = require("./middleware/auth-check");
 
-const API_PORT = process.env.API_PORT || 3001;
+const API_PORT = process.env.PORT || 3001;
 console.log("API_PORT :" + API_PORT);
 
 const app = express();
