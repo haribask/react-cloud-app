@@ -16,7 +16,7 @@ console.log("API_PORT :" + API_PORT);
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, "client", "build")));
+app.use(express.static(path.join(__dirname, "build")));
 //app.use(cors());
 
 const router = express.Router();
@@ -298,7 +298,7 @@ console.log("__dirname :" + __dirname);
 //console.log("_dirname :" + _dirname);
 
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+  res.sendFile(path.join(__dirname, "build", "index.html"));
 });
 
 app.listen(API_PORT, () => console.log("listening on port " + API_PORT));
