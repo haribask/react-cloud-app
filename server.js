@@ -13,6 +13,9 @@ const path = require("path");
 const API_PORT = process.env.PORT || config.apiPort;
 console.log("API_PORT :" + API_PORT);
 
+const JWT_SECRET = process.env.JWTSECRET || config.jwtSecret;
+console.log("jwtSecret: " + JWT_SECRET);
+
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -46,9 +49,6 @@ authenticate = (req, res, next) => {
       error: "User not logged in!!"
     });
   }
-
-  const JWT_SECRET = process.env.JWTSECRET || config.jwtSecret;
-  console.log("jwtSecret: " + JWT_SECRET);
 
   return jwt.verify(token, JWT_SECRET, (err, decoded) => {
     // the 401 code is for unauthorized status
