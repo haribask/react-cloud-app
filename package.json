@@ -4,7 +4,7 @@
   "description": "MERN_stack_in_Heroku",
   "main": "index.js",
   "scripts": {
-    "heroku-postbuild": "cd client && npm install && npm run build"
+    "start": "concurrently \"cd server && node server.js\" \"cd client && npm start\""
   },
   "author": "HariLakshmiNarayanan",
   "license": "ISC",

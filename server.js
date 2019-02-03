@@ -22,6 +22,17 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, "build")));
 //app.use(cors());
 
+//CORS Middleware
+/*app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*"); //Enabling CORS
+  res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, contentType,Content-Type, Accept, Authorization"
+  );
+  next();
+});
+*/
 const router = express.Router();
 
 const url = process.env.DBURI || config.dbUri;
